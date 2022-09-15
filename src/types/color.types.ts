@@ -1,3 +1,5 @@
 export interface Color {
-  rgb: string;
+  rgb: {
+    value: string;
+  };
 }

@@ -7,5 +7,10 @@ export function getColorScheme(color = "0,0,0") {
         rgb: color,
       },
     })
-    .then((response) => response);
+    .then((response) => {
+      console.log("api color argument: ", color);
+
+      console.log("api service call: ", response);
+      return response;
+    });
 }

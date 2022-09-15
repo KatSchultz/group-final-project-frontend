@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getColorScheme } from "../services/api.service";
+import { Color } from "../types/color.types";
 import PaletteDisplay from "./PaletteDisplay";
 
 export default function SearchForm() {
-  const [colors, setColors] = useState([]);
+  const [colors, setColors] = useState<Color[]>([]);
   const [userInput, setUserInput] = useState("");
 
   useEffect(() => {
@@ -12,9 +13,9 @@ export default function SearchForm() {
 
   function getColors() {
     getColorScheme("180,20,150").then((response) => {
-      console.log(response.data.colors);
+      console.log("GetColors response: ", response.data.colors);
       setColors(response.data.colors);
-      console.log(colors);
+      console.log("Colors after setColors: ", colors);
     });
   }
 
