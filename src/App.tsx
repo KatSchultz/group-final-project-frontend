@@ -5,7 +5,11 @@ import DashboardPage from "./pages/DashboardPage";
 function App() {
   return (
     <div className="App">
-      <DashboardPage />
+      <Routes>
+        {/* <Route path='/' element={<DashboardPage />} /> */}
+        {/* <Route path='/id' element={} /> */}
+        {/* <Route path='/scheme' element={} /> */}
+      </Routes>
     </div>
   );
 }

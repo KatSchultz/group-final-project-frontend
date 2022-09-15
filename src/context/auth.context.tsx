@@ -1,5 +1,5 @@
-import { User } from "firebase/auth";
 import { createContext, useState } from 'react';
+import { User } from "firebase/auth";
 
 interface AuthContextModel {
     user: User | null;
