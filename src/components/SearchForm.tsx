@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getColorScheme } from "../services/api.service";
 import { Color } from "../types/color.types";
+import ColorPlay from "./ColorPlay";
 import PaletteDisplay from "./PaletteDisplay";
 
 export default function SearchForm() {
@@ -56,6 +57,7 @@ export default function SearchForm() {
           ))}
         </div>
       </div>
+      {/* <ColorPlay /> */}
     </div>
   );
 }
