@@ -1,8 +1,3 @@
-import { withTheme } from "@emotion/react";
-import { disconnect } from "process";
-import { stringify } from "querystring";
-import React from "react";
-
 //This is where i'm trying to figure out how to slightly randomize a color, but keep it in the same color family
 
 export default function ColorPlay() {
@@ -13,48 +8,29 @@ export default function ColorPlay() {
   //   const blue = rgb(0, 0, 255);
   //   const purple = rgb(128, 0, 128);
 
-  function getRandomMaxNum() {
-    return Math.random() * (255 - 200) + 200;
-  }
-  function getRandomMedNum() {
-    return Math.random() * (200 - 100) + 100;
-  }
-
-  function getRandomMinNum() {
-    return Math.random() * (60 - 0);
-  }
-
-  function createRed() {
-    return `${getRandomMaxNum()}, ${getRandomMinNum()}, ${getRandomMinNum()}` as string;
-  }
-  function createOrange() {
-    return `${getRandomMaxNum()}, ${getRandomMedNum()}, ${getRandomMinNum()}` as string;
+  function createRGB(
+    rMax: number,
+    rMin: number,
+    gMax: number,
+    gMin: number,
+    bMax: number,
+    bMin: number
+  ) {
+    const r = Math.random() * (rMax - rMin) + rMin;
+    const g = Math.random() * (gMax - gMin) + gMin;
+    const b = Math.random() * (bMax - bMin) + bMin;
+    return `${r}, ${g}, ${b}`;
   }
 
-  function createYellow() {
-    return `${getRandomMaxNum()}, ${getRandomMaxNum()}, 0` as string;
-  }
-
-  function createGreen() {
-    return `0, ${getRandomMedNum()}, ${getRandomMinNum()}` as string;
-  }
-
-  function createBlue() {
-    return `${getRandomMinNum()}, ${getRandomMinNum()}, ${getRandomMaxNum()}` as string;
-  }
-
-  function createPurple() {
-    return `${getRandomMedNum()},0,${getRandomMedNum()}` as string;
-  }
-  let randomRed = createRed();
-  let randomOrange = createOrange();
-  let randomYellow = createYellow();
-  let randomGreen = createGreen();
-  let randomBlue = createBlue();
-  let randomPurple = createPurple();
+  const red = createRGB(255, 200, 60, 0, 60, 0);
+  const orange = createRGB(255, 200, 200, 100, 30, 0);
+  const yellow = createRGB(255, 200, 255, 200, 0, 0);
+  const green = createRGB(0, 0, 200, 100, 60, 0);
+  const blue = createRGB(60, 0, 60, 0, 255, 200);
+  const purple = createRGB(200, 100, 0, 0, 200, 100);
 
   const redStyles = {
-    backgroundColor: `rgb(${randomRed})`,
+    backgroundColor: `rgb(${red})`,
     padding: 40,
     marginBottom: 10,
     fontSize: "2rem",
@@ -63,7 +39,7 @@ export default function ColorPlay() {
   };
 
   const orangeStyles = {
-    backgroundColor: `rgb(${randomOrange})`,
+    backgroundColor: `rgb(${orange})`,
     padding: 40,
     marginBottom: 10,
     fontSize: "2rem",
@@ -71,7 +47,7 @@ export default function ColorPlay() {
   };
 
   const yellowStyles = {
-    backgroundColor: `rgb(${randomYellow})`,
+    backgroundColor: `rgb(${yellow})`,
     padding: 40,
     marginBottom: 10,
     fontSize: "2rem",
@@ -80,7 +56,7 @@ export default function ColorPlay() {
   };
 
   const greenStyles = {
-    backgroundColor: `rgb(${randomGreen})`,
+    backgroundColor: `rgb(${green})`,
     padding: 40,
     marginBottom: 10,
     fontSize: "2rem",
@@ -89,7 +65,7 @@ export default function ColorPlay() {
   };
 
   const blueStyles = {
-    backgroundColor: `rgb(${randomBlue})`,
+    backgroundColor: `rgb(${blue})`,
     padding: 40,
     marginBottom: 10,
     fontSize: "2rem",
@@ -98,7 +74,7 @@ export default function ColorPlay() {
   };
 
   const purpleStyles = {
-    backgroundColor: `rgb(${randomPurple})`,
+    backgroundColor: `rgb(${purple})`,
     padding: 40,
     marginBottom: 10,
     fontSize: "2rem",
@@ -106,7 +82,7 @@ export default function ColorPlay() {
     color: "white",
   };
 
-  console.log("createBlue: ", randomBlue);
+  console.log("createBlue: ", blue);
   return (
     <div>
       <div style={redStyles}>RED</div>

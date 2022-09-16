@@ -57,7 +57,7 @@ export default function SearchForm() {
           ))}
         </div>
       </div>
-      {/* <ColorPlay /> */}
+      <ColorPlay />
     </div>
   );
 }
