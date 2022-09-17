@@ -6,6 +6,8 @@ import PaletteDisplay from "./PaletteDisplay";
 
 export default function SearchForm() {
   const [colors, setColors] = useState<Color[]>([]);
+  const [inputMood, setInputMood] = useState("");
+  const [mood, setMood] = useState("calm");
   const [userInput, setUserInput] = useState("");
 
   useEffect(() => {
@@ -24,14 +26,41 @@ export default function SearchForm() {
     setUserInput(e.target.value);
   }
 
+  function handleMoodChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setInputMood(e.target.value);
+    console.log("Mood in change handler: ", inputMood);
+  }
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("submit button clicked");
-    console.log(userInput);
-    getColorScheme(userInput).then((response) => {
+
+    if (inputMood === "calm") {
+      setMood(createRGB(60, 0, 60, 0, 255, 200));
+    }
+    if (inputMood === "energetic") {
+      setMood(createRGB(255, 200, 255, 200, 0, 0));
+    }
+    if (inputMood === "powerful") {
+      setMood(createRGB(255, 200, 60, 0, 60, 0));
+    }
+    getColorScheme(mood).then((response) => {
       setColors(response.data.colors);
-      console.log("colors on submit: ", colors);
     });
+  }
+
+  function createRGB(
+    rMax: number,
+    rMin: number,
+    gMax: number,
+    gMin: number,
+    bMax: number,
+    bMin: number
+  ) {
+    const r = Math.round(Math.random() * (rMax - rMin) + rMin);
+    const g = Math.round(Math.random() * (gMax - gMin) + gMin);
+    const b = Math.round(Math.random() * (bMax - bMin) + bMin);
+
+    return `${r}, ${g}, ${b}`;
   }
 
   return (
@@ -39,14 +68,20 @@ export default function SearchForm() {
       <div className="theColorAPI">
         <h1>The Color API Testing</h1>
         <form action="">
-          <label>Color Search</label>
+          {/* <label>Color Search</label>
           <input
             type="text"
             className="border-solid border-1 border-black"
             id="inputColor"
             value={userInput}
             onChange={handleChange}
-          />
+          /> */}
+          <label htmlFor="">Select a Mood</label>
+          <select name="mood" id="mood" onChange={handleMoodChange}>
+            <option value="energetic">Energetic</option>
+            <option value="powerful">Powerful</option>
+            <option value="calm">Calm</option>
+          </select>
           <button id="scheme-button" type="submit" onClick={handleSubmit}>
             Get Color Scheme
           </button>
@@ -57,7 +92,7 @@ export default function SearchForm() {
           ))}
         </div>
       </div>
-      <ColorPlay />
+      {/* <ColorPlay /> */}
     </div>
   );
 }
