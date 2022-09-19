@@ -46,9 +46,9 @@ export default function SearchForm() {
     }
     if (inputMood === "energetic") {
       if (Math.random() > 0.5) {
-        setMood(createRGB(255, 200, 255, 200, 0, 0));
+        setMood(createRGB(255, 200, 255, 200, 40, 0));
       } else {
-        setMood(createRGB(255, 200, 200, 100, 30, 0));
+        setMood(createRGB(255, 200, 200, 100, 50, 0));
       }
     }
     if (inputMood === "powerful") {
@@ -86,7 +86,7 @@ export default function SearchForm() {
 
   return (
     <div>
-      <div className="theColorAPI">
+      <div className="theColorAPI flex flex-col items-center">
         <h1>The Color API Testing</h1>
         <form action="">
           {/* <label>Color Search</label>
@@ -99,25 +99,23 @@ export default function SearchForm() {
           /> */}
           <label htmlFor="">Select a Mood</label>
           <select name="mood" id="mood" onChange={handleMoodChange}>
+            <option value="calm">Calm</option>
             <option value="energetic">Energetic</option>
             <option value="powerful">Powerful</option>
-            <option value="calm">Calm</option>
           </select>
           <button id="scheme-button" type="submit" onClick={handleSubmit}>
             Get Color Scheme
           </button>
         </form>
-        <div className="color-container">
+        <div className="palette flex flex-row">
           {colors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
           ))}
-        </div>
-        <div className="color-container">
+
           {analogColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
           ))}
-        </div>
-        <div className="color-container">
+
           {complementColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
           ))}

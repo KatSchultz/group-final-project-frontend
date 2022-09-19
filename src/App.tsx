@@ -4,7 +4,7 @@ import DashboardPage from "./pages/DashboardPage";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App w-full">
       <DashboardPage />
       {/* <Routes> */}
       {/* <Route path='/' element={<DashboardPage />} /> */}

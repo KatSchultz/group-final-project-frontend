@@ -12,7 +12,7 @@ export default function PaletteDisplay({ color }: Props) {
 
   return (
     <div className="w-20 h-20" style={styles}>
-      <div>PaletteDisplay</div>
+      <div>Color</div>
     </div>
   );
 }
