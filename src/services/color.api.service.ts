@@ -14,9 +14,6 @@ export function getColorScheme(
       },
     })
     .then((response) => {
-      console.log("api color argument: ", color);
-
-      console.log("api service call: ", response);
       return response;
     });
 }

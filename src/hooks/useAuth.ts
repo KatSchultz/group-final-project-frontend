@@ -13,7 +13,7 @@ export function useAuth() {
       async (firebaseUser) => {
         if (firebaseUser && !user) {
           const user = await getLoginUser(firebaseUser.uid);
-          // setUser(user)
+          setUser(user);
         } else {
           if (!firebaseUser) {
             navigate("/login");

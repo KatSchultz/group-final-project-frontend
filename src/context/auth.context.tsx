@@ -1,26 +1,26 @@
-import { createContext, useState } from 'react';
-import { User } from "firebase/auth";
+import { createContext, useState } from "react";
+import { User } from "../types/user.types";
 
 interface AuthContextModel {
-    user: User | null;
-    setUser: (user: User) => void;
+  user: User | null;
+  setUser: (user: User) => void;
 }
 
 export const AuthContext = createContext<AuthContextModel>({
-    user: null,
-    setUser: () => {},
+  user: null,
+  setUser: () => {},
 });
 
 interface Props {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
-export function AuthContextProvider({children}: Props) {
-    const [user, setUser] = useState<User | null>(null);
+export function AuthContextProvider({ children }: Props) {
+  const [user, setUser] = useState<User | null>(null);
 
-    return (
-        <AuthContext.Provider value={{user, setUser}}>
-            {children}
-        </AuthContext.Provider>
-    )
+  return (
+    <AuthContext.Provider value={{ user, setUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }

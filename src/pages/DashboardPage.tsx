@@ -8,6 +8,8 @@ export default function DashboardPage() {
     <div className="w-full">
       <SearchForm />
       <SampleLayout />
+      <SampleLayout />
+      <SampleLayout />
     </div>
   );
 }

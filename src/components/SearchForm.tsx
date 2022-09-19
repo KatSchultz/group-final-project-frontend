@@ -1,6 +1,6 @@
 import { response } from "express";
 import React, { useEffect, useState } from "react";
-import { getColorScheme } from "../services/api.service";
+import { getColorScheme } from "../services/color.api.service";
 import { Color } from "../types/color.types";
 import ColorPlay from "./ColorPlay";
 import PaletteDisplay from "./PaletteDisplay";
