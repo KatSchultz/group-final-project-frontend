@@ -1,3 +1,4 @@
+import { response } from "express";
 import React, { useEffect, useState } from "react";
 import { getColorScheme } from "../services/api.service";
 import { Color } from "../types/color.types";
@@ -6,8 +7,10 @@ import PaletteDisplay from "./PaletteDisplay";
 
 export default function SearchForm() {
   const [colors, setColors] = useState<Color[]>([]);
-  const [inputMood, setInputMood] = useState("");
-  const [mood, setMood] = useState("calm");
+  const [analogColors, setAnalogColors] = useState<Color[]>([]);
+  const [complementColors, setComplementColors] = useState<Color[]>([]);
+  const [inputMood, setInputMood] = useState("calm");
+  const [mood, setMood] = useState("180,20,150");
   const [userInput, setUserInput] = useState("");
 
   useEffect(() => {
@@ -36,7 +39,7 @@ export default function SearchForm() {
 
     if (inputMood === "calm") {
       if (Math.random() > 0.5) {
-        setMood(createRGB(0, 0, 220, 80, 80, 0));
+        setMood(createRGB(0, 0, 255, 180, 120, 80));
       } else {
         setMood(createRGB(80, 0, 80, 0, 255, 180));
       }
@@ -55,9 +58,15 @@ export default function SearchForm() {
         setMood(createRGB(240, 140, 0, 0, 240, 140));
       }
     }
-    getColorScheme(mood).then((response) => {
+    getColorScheme(mood, "analogic", 5).then((response) => {
       setColors(response.data.colors);
     });
+    getColorScheme(mood, "complement", 2).then((response) => {
+      setAnalogColors(response.data.colors);
+    });
+    // getColorScheme(mood, "complement", 2).then((response) => {
+    //   setComplementColors(response.data.colors);
+    // });
   }
 
   function createRGB(
@@ -100,6 +109,16 @@ export default function SearchForm() {
         </form>
         <div className="color-container">
           {colors.map((color, index) => (
+            <PaletteDisplay key={index} color={color} />
+          ))}
+        </div>
+        <div className="color-container">
+          {analogColors.map((color, index) => (
+            <PaletteDisplay key={index} color={color} />
+          ))}
+        </div>
+        <div className="color-container">
+          {complementColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
           ))}
         </div>
