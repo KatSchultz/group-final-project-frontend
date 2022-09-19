@@ -35,13 +35,25 @@ export default function SearchForm() {
     e.preventDefault();
 
     if (inputMood === "calm") {
-      setMood(createRGB(60, 0, 60, 0, 255, 200));
+      if (Math.random() > 0.5) {
+        setMood(createRGB(0, 0, 220, 80, 80, 0));
+      } else {
+        setMood(createRGB(80, 0, 80, 0, 255, 180));
+      }
     }
     if (inputMood === "energetic") {
-      setMood(createRGB(255, 200, 255, 200, 0, 0));
+      if (Math.random() > 0.5) {
+        setMood(createRGB(255, 200, 255, 200, 0, 0));
+      } else {
+        setMood(createRGB(255, 200, 200, 100, 30, 0));
+      }
     }
     if (inputMood === "powerful") {
-      setMood(createRGB(255, 200, 60, 0, 60, 0));
+      if (Math.random() > 0.5) {
+        setMood(createRGB(255, 200, 60, 0, 60, 0));
+      } else {
+        setMood(createRGB(240, 140, 0, 0, 240, 140));
+      }
     }
     getColorScheme(mood).then((response) => {
       setColors(response.data.colors);
