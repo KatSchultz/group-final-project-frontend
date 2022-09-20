@@ -7,7 +7,7 @@ interface Props {
 
 export default function PaletteDisplay({ color }: Props) {
   const styles = {
-    backgroundColor: `${color.rgb.value}`,
+    backgroundColor: `${color.hsl.value}`,
   };
 
   return (

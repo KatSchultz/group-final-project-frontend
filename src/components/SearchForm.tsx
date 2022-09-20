@@ -14,7 +14,7 @@ export default function SearchForm() {
   const [analogColors, setAnalogColors] = useState<Color[]>([]);
   const [complementColors, setComplementColors] = useState<Color[]>([]);
   const [inputMood, setInputMood] = useState("calm");
-  const [mood, setMood] = useState("180,20,150");
+  const [mood, setMood] = useState("180,80%,80%");
   const [userInput, setUserInput] = useState("");
   const [tempPalette, setTempPalete] = useState({
     primaryColor: "",
@@ -27,7 +27,7 @@ export default function SearchForm() {
   }, []);
 
   function getColors() {
-    getColorScheme("180,20,150").then((response) => {
+    getColorScheme("180,80%,80%").then((response) => {
       console.log("GetColors response: ", response.data.colors);
       setColors(response.data.colors);
       console.log("Colors after setColors: ", colors);
@@ -40,6 +40,12 @@ export default function SearchForm() {
 
   function handleMoodChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setInputMood(e.target.value);
+    if (e.target.value === "calm") {
+      setMood(createHSL(165, 260, 80, 100, 50, 75));
+    } else if (e.target.value === "energetic") {
+      setMood(createHSL(45, 80, 80, 100, 50, 75));
+    } else if (e.target.value === "powerful") {
+    }
     console.log("Mood in change handler: ", inputMood);
   }
 
@@ -48,29 +54,33 @@ export default function SearchForm() {
 
     if (inputMood === "calm") {
       if (Math.random() > 0.5) {
-        setMood(createRGB(0, 0, 255, 180, 120, 80));
+        setMood(createHSL(165, 260, 80, 100, 50, 75)); //blue
       } else {
-        setMood(createRGB(80, 0, 80, 0, 255, 180));
+        setMood(createHSL(75, 165, 80, 100, 50, 75)); //green
       }
     }
+
     if (inputMood === "energetic") {
       if (Math.random() > 0.5) {
-        setMood(createRGB(255, 200, 255, 200, 40, 0));
+        setMood(createHSL(45, 80, 80, 100, 50, 75)); //yellow
       } else {
-        setMood(createRGB(255, 200, 200, 100, 50, 0));
+        setMood(createHSL(20, 45, 80, 100, 50, 75)); //orange
       }
     }
+
     if (inputMood === "powerful") {
       if (Math.random() > 0.5) {
-        setMood(createRGB(255, 200, 60, 0, 60, 0));
+        setMood(createHSL(20, 0, 80, 100, 50, 75)); //red
       } else {
-        setMood(createRGB(240, 140, 0, 0, 240, 140));
+        setMood(createHSL(275, 310, 80, 100, 50, 75)); //purple
       }
     }
-    getColorScheme(mood, "monochrome", 6).then((response) => {
+
+    console.log("Mood inside submit button after setting: ", mood);
+    getColorScheme(mood, "monochrome", 8).then((response) => {
       setColors(response.data.colors);
     });
-    getColorScheme(mood, "complement", 2).then((response) => {
+    getColorScheme(mood, "complement", 4).then((response) => {
       setAnalogColors(response.data.colors);
     });
     // getColorScheme(mood, "complement", 2).then((response) => {
@@ -80,36 +90,35 @@ export default function SearchForm() {
     setPalette({
       _id: "throwaway",
       name: "my new palette",
-      primaryColor: colors[5].rgb.value,
-      secondaryColor: colors[1].rgb.value,
-      tertiaryColor: analogColors[0].rgb.value,
+      primaryColor: colors[7].hsl.value,
+      secondaryColor: colors[3].hsl.value,
+      tertiaryColor: analogColors[1].hsl.value,
     });
   }
 
   function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     setTempPalete({
-      primaryColor: colors[0].rgb.value,
-      secondaryColor: colors[2].rgb.value,
+      primaryColor: colors[3].rgb.value,
+      secondaryColor: colors[7].rgb.value,
       tertiaryColor: analogColors[0].rgb.value,
     });
 
     //OPEN SAVE PALETTE FORM
   }
 
-  function createRGB(
-    rMax: number,
-    rMin: number,
-    gMax: number,
-    gMin: number,
-    bMax: number,
-    bMin: number
+  function createHSL(
+    hMax: number,
+    hMin: number,
+    sMax: number,
+    sMin: number,
+    lMax: number,
+    lMin: number
   ) {
-    const r = Math.round(Math.random() * (rMax - rMin) + rMin);
-    const g = Math.round(Math.random() * (gMax - gMin) + gMin);
-    const b = Math.round(Math.random() * (bMax - bMin) + bMin);
-
-    return `${r}, ${g}, ${b}`;
+    const h = Math.round(Math.random() * (hMax - hMin) + hMin);
+    const s = Math.round(Math.random() * (sMax - sMin) + sMin);
+    const l = Math.round(Math.random() * (lMax - lMin) + lMin);
+    return `${h},${s}%,${l}%`;
   }
 
   return (
@@ -145,9 +154,9 @@ export default function SearchForm() {
             <PaletteDisplay key={index} color={color} />
           ))}
 
-          {complementColors.map((color, index) => (
+          {/* {complementColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
-          ))}
+          ))} */}
         </div>
       </div>
       {/* <ColorPlay /> */}

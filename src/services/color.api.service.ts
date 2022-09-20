@@ -8,12 +8,13 @@ export function getColorScheme(
   return axios
     .get(`https://www.thecolorapi.com/scheme?`, {
       params: {
-        rgb: color,
+        hsl: color,
         mode,
         count,
       },
     })
     .then((response) => {
+      console.log(response);
       return response;
     });
 }

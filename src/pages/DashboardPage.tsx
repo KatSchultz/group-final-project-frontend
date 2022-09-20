@@ -4,19 +4,25 @@ import SearchForm from "../components/SearchForm";
 import SampleLayout from "../components/SampleLayout";
 import { AuthContext } from "../context/auth.context";
 import AppHeader from "../components/AppHeader";
-
+import { PaletteContext } from "../context/palette.context";
 
 export default function DashboardPage() {
   const { user } = useContext(AuthContext);
+  const { palette } = useContext(PaletteContext);
 
+  const styles = {
+    backgroundColor: `${palette.primaryColor}`,
+  };
 
   return (
     <div className="w-full">
       <AppHeader />
       <SearchForm />
-      <SampleLayout />
-      <SampleLayout />
-      <SampleLayout />
+      <div className="layout-holder p-6" style={styles}>
+        <SampleLayout />
+        <SampleLayout />
+        <SampleLayout />
+      </div>
     </div>
   );
 }
