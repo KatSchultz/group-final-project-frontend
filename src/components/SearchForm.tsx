@@ -8,7 +8,7 @@ import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 
 export default function SearchForm() {
-  const setPalette = useContext(PaletteContext);
+  const { setPalette } = useContext(PaletteContext);
 
   const [colors, setColors] = useState<Color[]>([]);
   const [analogColors, setAnalogColors] = useState<Color[]>([]);
@@ -67,7 +67,7 @@ export default function SearchForm() {
         setMood(createRGB(240, 140, 0, 0, 240, 140));
       }
     }
-    getColorScheme(mood, "analogic", 5).then((response) => {
+    getColorScheme(mood, "monochrome", 6).then((response) => {
       setColors(response.data.colors);
     });
     getColorScheme(mood, "complement", 2).then((response) => {
@@ -76,6 +76,25 @@ export default function SearchForm() {
     // getColorScheme(mood, "complement", 2).then((response) => {
     //   setComplementColors(response.data.colors);
     // });
+
+    setPalette({
+      _id: "throwaway",
+      name: "my new palette",
+      primaryColor: colors[5].rgb.value,
+      secondaryColor: colors[1].rgb.value,
+      tertiaryColor: analogColors[0].rgb.value,
+    });
+  }
+
+  function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setTempPalete({
+      primaryColor: colors[0].rgb.value,
+      secondaryColor: colors[2].rgb.value,
+      tertiaryColor: analogColors[0].rgb.value,
+    });
+
+    //OPEN SAVE PALETTE FORM
   }
 
   function createRGB(
@@ -115,7 +134,7 @@ export default function SearchForm() {
           <button id="scheme-button" type="submit" onClick={handleSubmit}>
             Get Colors
           </button>
-          <button>Save Color Palette</button>
+          <button onClick={saveTempPalette}>Save Color Palette</button>
         </form>
         <div className="palette flex flex-row">
           {colors.map((color, index) => (

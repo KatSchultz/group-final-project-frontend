@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import { Palette } from "../types/palette.types";
-import { AuthContext } from "./auth.context";
 
 interface PaletteContextModel {
   palette: Palette;
