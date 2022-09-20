@@ -1,4 +1,4 @@
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, User as FirebaseUser } from "firebase/auth";
 import { api } from "../libs/axios";
 import { firebaseAuth, googleAuthProvider } from "../libs/firebase";
 import { queryClient } from "../libs/react-query";

@@ -1,16 +1,23 @@
-import React from "react";
+import { Routes, Route } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
 import "./App.css";
 import DashboardPage from "./pages/DashboardPage";
+import SingupPage from './pages/SingupPage';
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
     <div className="App w-full">
-      <DashboardPage />
-      {/* <Routes> */}
-      {/* <Route path='/' element={<DashboardPage />} /> */}
+      <Routes>
+      <Route path='/' element={
+        <PrivateRoute>
+          <DashboardPage /> 
+        </PrivateRoute>}
+      />
+      <Route path='/login' element={<LoginPage />} />
+      <Route path='/signup' element={<SingupPage />} />
       {/* <Route path='/id' element={} /> */}
-      {/* <Route path='/scheme' element={} /> */}
-      {/* </Routes> */}
+      </Routes>
     </div>
   );
 }
