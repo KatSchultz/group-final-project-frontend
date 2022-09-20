@@ -11,7 +11,9 @@ export default function SampleLayout() {
     border: `4px solid ${palette.secondaryColor}`,
   };
   const buttonStyle = {
-    backgroundColor: `${palette.tertiaryColor}`,
+    // border: ` 3px solid ${palette.}`,
+    backgroundColor: `${palette.secondaryColor}`,
+    color: `${palette.tertiaryColor}`,
   };
   return (
     <div
@@ -29,7 +31,7 @@ export default function SampleLayout() {
       </p>
       <div className="call-to-action flex justify-center items-center">
         <p>Press this button for more info</p>
-        <button style={buttonStyle} className="p-2 m-2">
+        <button style={buttonStyle} className="p-2 m-2 rounded-lg">
           Click Me!
         </button>
       </div>

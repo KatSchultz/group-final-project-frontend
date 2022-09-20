@@ -114,7 +114,7 @@ export default function SearchForm() {
 
   return (
     <div>
-      <div className="theColorAPI flex flex-col items-center">
+      <div className="theColorAPI flex flex-col items-center bg-white">
         <h1>The Color API Testing</h1>
         <form action="">
           {/* <label>Color Search</label>
