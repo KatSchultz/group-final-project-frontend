@@ -1,17 +1,26 @@
 import { response } from "express";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getColorScheme } from "../services/color.api.service";
 import { Color } from "../types/color.types";
 import ColorPlay from "./ColorPlay";
 import PaletteDisplay from "./PaletteDisplay";
+import { PaletteContext } from "../context/palette.context";
+import { Palette } from "../types/palette.types";
 
 export default function SearchForm() {
+  const setPalette = useContext(PaletteContext);
+
   const [colors, setColors] = useState<Color[]>([]);
   const [analogColors, setAnalogColors] = useState<Color[]>([]);
   const [complementColors, setComplementColors] = useState<Color[]>([]);
   const [inputMood, setInputMood] = useState("calm");
   const [mood, setMood] = useState("180,20,150");
   const [userInput, setUserInput] = useState("");
+  const [tempPalette, setTempPalete] = useState({
+    primaryColor: "",
+    secondaryColor: "",
+    tertiaryColor: "",
+  });
 
   useEffect(() => {
     getColors();
@@ -104,8 +113,9 @@ export default function SearchForm() {
             <option value="powerful">Powerful</option>
           </select>
           <button id="scheme-button" type="submit" onClick={handleSubmit}>
-            Get Color Scheme
+            Get Colors
           </button>
+          <button>Save Color Palette</button>
         </form>
         <div className="palette flex flex-row">
           {colors.map((color, index) => (

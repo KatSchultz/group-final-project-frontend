@@ -3,7 +3,7 @@ import { Palette } from "../types/palette.types";
 import { AuthContext } from "./auth.context";
 
 interface PaletteContextModel {
-  palette: Palette | null;
+  palette: Palette;
   setPalette: (palette: Palette) => void;
 }
 

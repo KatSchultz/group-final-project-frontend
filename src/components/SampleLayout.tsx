@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import rays from "../images/rays.jpg";
+import { PaletteContext } from "../context/palette.context";
 
 export default function SampleLayout() {
+  const { palette } = useContext(PaletteContext);
+  const styles = {
+    backgroundColor: `${palette.primaryColor}`,
+  };
   return (
-    <div className="w-8/12 p-4 m-4 flex flex-col items-center content-center mx-auto ">
+    <div
+      className="w-8/12 p-4 m-4 flex flex-col items-center content-center mx-auto"
+      style={styles}
+    >
       <img src={rays} alt="" />
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
