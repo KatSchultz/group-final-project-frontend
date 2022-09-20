@@ -2,8 +2,9 @@ import { Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import "./App.css";
 import DashboardPage from "./pages/DashboardPage";
-import SingupPage from './pages/SingupPage';
+import SignupPage from './pages/SignupPage';
 import PrivateRoute from './components/PrivateRoute'
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         </PrivateRoute>}
       />
       <Route path='/login' element={<LoginPage />} />
-      <Route path='/signup' element={<SingupPage />} />
-      {/* <Route path='/id' element={} /> */}
+      <Route path='/signup' element={<SignupPage />} />
+      <Route path='/:profileUsername' element={<ProfilePage />} />
       </Routes>
     </div>
   );
