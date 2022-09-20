@@ -8,7 +8,7 @@ import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 
 export default function SearchForm() {
-  const { setPalette } = useContext(PaletteContext);
+  const { palette, setPalette } = useContext(PaletteContext);
 
   const [colors, setColors] = useState<Color[]>([]);
   const [analogColors, setAnalogColors] = useState<Color[]>([]);
@@ -28,9 +28,13 @@ export default function SearchForm() {
 
   function getColors() {
     getColorScheme("180,80%,80%").then((response) => {
-      console.log("GetColors response: ", response.data.colors);
       setColors(response.data.colors);
-      console.log("Colors after setColors: ", colors);
+      setPalette({
+        ...palette,
+        primaryColor: response.data.colors[0],
+        secondaryColor: response.data.colors[1],
+        tertiaryColor: response.data.colors[2],
+      });
     });
   }
 
@@ -41,12 +45,12 @@ export default function SearchForm() {
   function handleMoodChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setInputMood(e.target.value);
     if (e.target.value === "calm") {
-      setMood(createHSL(165, 260, 80, 100, 50, 75));
+      setMood(createHSL(165, 260, 80, 100, 50, 85));
     } else if (e.target.value === "energetic") {
-      setMood(createHSL(45, 80, 80, 100, 50, 75));
+      setMood(createHSL(45, 80, 80, 100, 50, 85));
     } else if (e.target.value === "powerful") {
+      setMood(createHSL(20, 0, 80, 100, 50, 85));
     }
-    console.log("Mood in change handler: ", inputMood);
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -54,46 +58,49 @@ export default function SearchForm() {
 
     if (inputMood === "calm") {
       if (Math.random() > 0.5) {
-        setMood(createHSL(165, 260, 80, 100, 50, 75)); //blue
+        setMood(createHSL(165, 260, 80, 100, 70, 95)); //blue
       } else {
-        setMood(createHSL(75, 165, 80, 100, 50, 75)); //green
+        setMood(createHSL(75, 165, 80, 100, 70, 95)); //green
       }
     }
 
     if (inputMood === "energetic") {
       if (Math.random() > 0.5) {
-        setMood(createHSL(45, 80, 80, 100, 50, 75)); //yellow
+        setMood(createHSL(45, 80, 80, 100, 70, 95)); //yellow
       } else {
-        setMood(createHSL(20, 45, 80, 100, 50, 75)); //orange
+        setMood(createHSL(20, 45, 80, 100, 70, 95)); //orange
       }
     }
 
     if (inputMood === "powerful") {
       if (Math.random() > 0.5) {
-        setMood(createHSL(20, 0, 80, 100, 50, 75)); //red
+        setMood(createHSL(20, 0, 80, 100, 70, 95)); //red
       } else {
-        setMood(createHSL(275, 310, 80, 100, 50, 75)); //purple
+        setMood(createHSL(275, 310, 80, 100, 70, 95)); //purple
       }
     }
 
-    console.log("Mood inside submit button after setting: ", mood);
     getColorScheme(mood, "monochrome", 8).then((response) => {
       setColors(response.data.colors);
+      setPalette({
+        ...palette,
+        primaryColor: response.data.colors[7].hsl.value,
+        secondaryColor: response.data.colors[2].hsl.value,
+      });
+      return response;
     });
+
     getColorScheme(mood, "complement", 4).then((response) => {
       setAnalogColors(response.data.colors);
+      setPalette({
+        ...palette,
+        tertiaryColor: response.data.colors[1].hsl.value,
+      });
+      return response;
     });
     // getColorScheme(mood, "complement", 2).then((response) => {
     //   setComplementColors(response.data.colors);
     // });
-
-    setPalette({
-      _id: "throwaway",
-      name: "my new palette",
-      primaryColor: colors[7].hsl.value,
-      secondaryColor: colors[3].hsl.value,
-      tertiaryColor: analogColors[1].hsl.value,
-    });
   }
 
   function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
@@ -101,7 +108,7 @@ export default function SearchForm() {
     setTempPalete({
       primaryColor: colors[3].rgb.value,
       secondaryColor: colors[7].rgb.value,
-      tertiaryColor: analogColors[0].rgb.value,
+      tertiaryColor: analogColors[1].rgb.value,
     });
 
     //OPEN SAVE PALETTE FORM
@@ -150,9 +157,9 @@ export default function SearchForm() {
             <PaletteDisplay key={index} color={color} />
           ))}
 
-          {analogColors.map((color, index) => (
+          {/* {analogColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
-          ))}
+          ))} */}
 
           {/* {complementColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />

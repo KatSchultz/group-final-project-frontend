@@ -12,9 +12,10 @@ export default function SampleLayout() {
   };
   const buttonStyle = {
     // border: ` 3px solid ${palette.}`,
-    backgroundColor: `${palette.secondaryColor}`,
-    color: `${palette.tertiaryColor}`,
+    backgroundColor: `${palette.primaryColor}`,
+    border: `2px solid ${palette.tertiaryColor}`,
   };
+
   return (
     <div
       className="sample-layout w-9/12 p-6 m-6 flex flex-col items-center content-center mx-auto rounded-2xl shadow-xl"

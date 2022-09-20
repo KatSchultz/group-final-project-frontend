@@ -18,7 +18,7 @@ export default function DashboardPage() {
     <div className="w-full">
       <AppHeader />
       <SearchForm />
-      <div className="layout-holder p-6" style={styles}>
+      <div className="layout-holder p-2" style={styles}>
         <SampleLayout />
         <SampleLayout />
         <SampleLayout />
