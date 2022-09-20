@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import SearchForm from "../components/SearchForm";
 import SampleLayout from "../components/SampleLayout";
 import { AuthContext } from "../context/auth.context";
+import AppHeader from "../components/AppHeader";
 
 
 export default function DashboardPage() {
@@ -11,6 +12,7 @@ export default function DashboardPage() {
 
   return (
     <div className="w-full">
+      <AppHeader />
       <SearchForm />
       <SampleLayout />
       <SampleLayout />
