@@ -1,10 +1,11 @@
 import axios from "axios";
+import { Response } from "../types/response.types";
 
 export function getColorScheme(
   color = "0,0,0",
   mode = "monochrome",
   count = 3
-) {
+): Promise<Response> {
   return axios
     .get(`https://www.thecolorapi.com/scheme?`, {
       params: {
@@ -14,7 +15,6 @@ export function getColorScheme(
       },
     })
     .then((response) => {
-      console.log("Fresh Response: ", response);
       return response;
     });
 }

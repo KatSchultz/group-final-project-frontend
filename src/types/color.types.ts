@@ -3,6 +3,9 @@ export interface Color {
     value: string;
   };
   hsl: {
+    h: number;
+    s: number;
+    l: number;
     value: string;
   };
 }

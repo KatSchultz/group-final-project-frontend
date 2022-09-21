@@ -7,12 +7,14 @@ export default function SampleLayout() {
   const divStyles = {
     backgroundColor: `white`,
   };
-  const borderStyles = {
+  const imageStyles = {
+    backgroundColor: `${palette.primaryColor}`,
     border: `4px solid ${palette.secondaryColor}`,
   };
+
   const buttonStyle = {
     // border: ` 3px solid ${palette.}`,
-    backgroundColor: `${palette.primaryColor}`,
+    backgroundColor: `${palette.tertiaryColor}`,
     border: `2px solid ${palette.tertiaryColor}`,
   };
 
@@ -21,7 +23,7 @@ export default function SampleLayout() {
       className="sample-layout w-9/12 p-6 m-6 flex flex-col items-center content-center mx-auto rounded-2xl shadow-xl"
       style={divStyles}
     >
-      <img src={rays} alt="" style={borderStyles} />
+      <img src={rays} alt="" style={imageStyles} className="image" />
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
         magnam omnis dignissimos delectus esse doloremque? Optio incidunt dolore

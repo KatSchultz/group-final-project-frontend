@@ -2,12 +2,12 @@ import React from "react";
 import { Color } from "../types/color.types";
 
 interface Props {
-  color: Color;
+  color: string;
 }
 
 export default function PaletteDisplay({ color }: Props) {
   const styles = {
-    backgroundColor: `${color.hsl.value}`,
+    backgroundColor: `${color}`,
   };
 
   return (
