@@ -1,9 +1,11 @@
 import { Menu, UnstyledButton, Avatar, Text } from '@mantine/core';
-import { IconLogout, IconChevronDown } from '@tabler/icons';
+import { IconLogout, IconChevronDown, IconUserCircle } from '@tabler/icons';
+import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { logout } from '../services/auth.service';
+import { getProfileByUsername } from '../services/profile.service';
 
 export default function AccountMenu() {
   const { user } = useContext(AuthContext);
@@ -13,6 +15,7 @@ export default function AccountMenu() {
     await logout();
     navigate('/login');
   };
+
 
   return (
     <div>
@@ -32,6 +35,9 @@ export default function AccountMenu() {
           </UnstyledButton>
         </Menu.Target>
         <Menu.Dropdown>
+          <Menu.Item icon={<IconUserCircle size={16} />} component={Link} to='/account'>
+            Profile
+          </Menu.Item>
           <Menu.Item icon={<IconLogout size={16} />} onClick={handleLogout}>
             Logout
           </Menu.Item>
@@ -40,3 +46,4 @@ export default function AccountMenu() {
     </div>
   );
 }
+
