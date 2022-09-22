@@ -1,45 +1,40 @@
 import { Avatar, Center, Container, Stack, Text, Title } from '@mantine/core';
 import { getProfileByUsername } from '../services/profile.service';
+import { useState, useContext } from 'react'
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-// import { getLinksByUsername } from '../services/link.service';
+import { addPalette } from '../services/palette.service';
 import AppContainer from '../components/AppContainer';
-// import ProfileLinkViewCard from '../components/ProfileLinkViewCard';
+import { Palette } from '../types/palette.types';
+import AppHeader from '../components/AppHeader';
+import { AuthContext } from '../context/auth.context';
+
 
 export default function ProfilePage() {
-  const { profileUsername } = useParams();
-
-  const { data: profile } = useQuery(
-    ['profile', profileUsername],
-    async () => await getProfileByUsername(profileUsername as string)
-  );
-
-  // const { data: links } = useQuery(
-  //   ['links', profileUsername],
-  //   async () => await getLinksByUsername(profileUsername as string)
-  // );
+  const { user } = useContext(AuthContext)
+ 
 
   return (
     <AppContainer>
+      <AppHeader />
       <Container size="xs">
         <Stack spacing="xl">
           <Center>
             <Avatar
-              src={profile?.profilePhotoUrl}
+              src={user?.photoURL}
               alt="Profile image"
               color="blue"
               size={80}
               radius={100}
             >
-              {profile?.profileName.charAt(0)}
+              {user?.displayName?.charAt(0)}
             </Avatar>
           </Center>
           <div className="text-center">
-            <Title order={3}>{profile?.profileName}</Title>
-            <Text size="xl">{profile?.profileDescription}</Text>
+            <Title order={3}>{user?.displayName}</Title>
           </div>
           <Stack spacing="xs">
-            {/* {links && links.map((link) => <ProfileLinkViewCard link={link} />)} */}
+
           </Stack>
         </Stack>
       </Container>

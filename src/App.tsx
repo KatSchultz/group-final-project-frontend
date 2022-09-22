@@ -16,7 +16,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/palettes" element={<PaletteView />} />
         <Route
-          path="/:profileUsername"
+          path="/account"
           element={
             <PrivateRoute>
               <ProfilePage />
