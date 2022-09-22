@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import SignupPage from "./pages/SignupPage";
 import PrivateRoute from "./components/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
+import PaletteView from "./components/PaletteView";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/palettes" element={<PaletteView />} />
         <Route
           path="/:profileUsername"
           element={

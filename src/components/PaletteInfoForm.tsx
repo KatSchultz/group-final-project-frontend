@@ -22,7 +22,7 @@ import { IconAlertCircle } from "@tabler/icons";
 import { error } from "console";
 
 interface Props {
-  palette: Palette;
+  palette: Partial<Palette>;
 }
 
 export default function PaletteInfoForm({ palette }: Props) {

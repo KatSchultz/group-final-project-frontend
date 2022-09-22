@@ -5,6 +5,9 @@ import ColorPlay from "./ColorPlay";
 import PaletteDisplay from "./PaletteDisplay";
 import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
+import PaletteInfoForm from "./PaletteInfoForm";
+import { Tabs } from "@mantine/core";
+import { addPalette } from "../services/palette.service";
 
 export default function SearchForm() {
   const { palette, setPalette } = useContext(PaletteContext);
@@ -85,13 +88,26 @@ export default function SearchForm() {
 
   function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    console.log("Save palette clicked");
     setTempPalete({
       primaryColor: colors[1],
       secondaryColor: colors[0],
       tertiaryColor: colors[2],
     });
-
+    // return (
+    //   <Tabs.Panel value="profile" pt="lg">
+    //     <PaletteInfoForm palette={tempPalette} />;
+    //   </Tabs.Panel>
+    // );
     //OPEN SAVE PALETTE FORM
+
+    addPalette({
+      primaryColor: palette.primaryColor,
+      secondaryColor: palette.secondaryColor,
+      tertiaryColor: palette.tertiaryColor,
+      name: palette.primaryColor,
+      textColor: "black",
+    });
   }
 
   function createHSL(
