@@ -106,7 +106,7 @@ export default function SearchForm() {
         tertiaryColor: palette.tertiaryColor,
         name: palette.primaryColor,
         textColor: "black",
-        uid: `${user.uid}`,
+        uid: user.uid,
       });
     }
   }
