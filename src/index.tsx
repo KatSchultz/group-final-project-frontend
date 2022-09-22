@@ -6,6 +6,7 @@ import { AuthContextProvider } from "./context/auth.context";
 import "./index.css";
 import App from "./App";
 import { PaletteContextProvider } from "./context/palette.context";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,6 +20,7 @@ root.render(
             <App />
           </PaletteContextProvider>
         </AuthContextProvider>
+        <ReactQueryDevtools />
       </ReactQueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>

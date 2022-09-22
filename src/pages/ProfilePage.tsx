@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { addPalette } from '../services/palette.service';
 import { Palette } from '../types/palette.types';
+import { getPaletteByUid } from '../services/palette.service';
 import AppContainer from '../components/AppContainer';
 import AppHeader from '../components/AppHeader';
 import { AuthContext } from '../context/auth.context';
@@ -11,6 +12,13 @@ import { AuthContext } from '../context/auth.context';
 
 export default function ProfilePage() {
   const { user } = useContext(AuthContext)
+
+  const palettes = useQuery(
+    ['palettes', user?.uid],
+    async () => await getPaletteByUid(user?.uid as string)
+  );
+
+    console.log(palettes.data)
  
 
   return (
@@ -33,7 +41,9 @@ export default function ProfilePage() {
             <Title order={3}>{user?.displayName}</Title>
           </div>
           <Stack spacing="xs">
-
+            <Center>
+             
+            </Center>
           </Stack>
         </Stack>
       </Container>
