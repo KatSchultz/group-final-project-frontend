@@ -9,6 +9,6 @@ export interface Palette {
   imgUrl?: string;
   name: string;
   _id: string;
-  uid: string;
+  uid?: string;
 
 }

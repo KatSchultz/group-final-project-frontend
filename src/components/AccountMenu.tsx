@@ -5,7 +5,6 @@ import { useContext } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { logout } from '../services/auth.service';
-import { getProfileByUsername } from '../services/profile.service';
 
 export default function AccountMenu() {
   const { user } = useContext(AuthContext);
