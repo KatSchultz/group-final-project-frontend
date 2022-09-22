@@ -8,9 +8,15 @@ import { Palette } from "../types/palette.types";
 import PaletteInfoForm from "./PaletteInfoForm";
 import { Tabs } from "@mantine/core";
 import { addPalette } from "../services/palette.service";
+import { AuthContext } from "../context/auth.context";
+import { useNavigate } from "react-router-dom";
+import LoginPage from "../pages/LoginPage";
 
 export default function SearchForm() {
   const { palette, setPalette } = useContext(PaletteContext);
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [colors, setColors] = useState<string[]>([]);
   const [inputMood, setInputMood] = useState("calm");
@@ -89,25 +95,20 @@ export default function SearchForm() {
   function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     console.log("Save palette clicked");
-    setTempPalete({
-      primaryColor: colors[1],
-      secondaryColor: colors[0],
-      tertiaryColor: colors[2],
-    });
-    // return (
-    //   <Tabs.Panel value="profile" pt="lg">
-    //     <PaletteInfoForm palette={tempPalette} />;
-    //   </Tabs.Panel>
-    // );
-    //OPEN SAVE PALETTE FORM
 
-    addPalette({
-      primaryColor: palette.primaryColor,
-      secondaryColor: palette.secondaryColor,
-      tertiaryColor: palette.tertiaryColor,
-      name: palette.primaryColor,
-      textColor: "black",
-    });
+    if (!user) {
+      navigate("/login");
+    } else {
+      console.log(user.uid);
+      addPalette({
+        primaryColor: palette.primaryColor,
+        secondaryColor: palette.secondaryColor,
+        tertiaryColor: palette.tertiaryColor,
+        name: palette.primaryColor,
+        textColor: "black",
+        uid: `${user.uid}`,
+      });
+    }
   }
 
   function createHSL(

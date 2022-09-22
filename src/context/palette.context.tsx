@@ -13,6 +13,7 @@ export const PaletteContext = createContext<PaletteContextModel>({
     primaryColor: "rgb(230,230,230)",
     secondaryColor: "rgb(100,100,100)",
     tertiaryColor: "rgb(0,0,0)",
+    uid: "",
   },
   setPalette: () => {},
 });
@@ -28,6 +29,7 @@ export function PaletteContextProvider({ children }: Props) {
     primaryColor: "rgb(230,230,230)",
     secondaryColor: "rgb(100,100,100)",
     tertiaryColor: "rgb(0,0,0)",
+    uid: "",
   });
 
   return (
