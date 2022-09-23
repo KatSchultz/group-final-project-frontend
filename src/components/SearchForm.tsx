@@ -11,6 +11,8 @@ import { addPalette } from "../services/palette.service";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../libs/react-query";
 
 export default function SearchForm() {
   const { palette, setPalette } = useContext(PaletteContext);
@@ -92,7 +94,16 @@ export default function SearchForm() {
     });
   }
 
-  function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
+  const addPaletteMutation = useMutation(addPalette, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['palettes', user?.uid]);
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
+
+  async function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     console.log("Save palette clicked");
 
@@ -100,7 +111,7 @@ export default function SearchForm() {
       navigate("/login");
     } else {
       console.log(user.uid);
-      addPalette({
+      await addPaletteMutation.mutateAsync({
         primaryColor: palette.primaryColor,
         secondaryColor: palette.secondaryColor,
         tertiaryColor: palette.tertiaryColor,

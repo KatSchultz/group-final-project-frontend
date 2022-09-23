@@ -16,6 +16,11 @@ export async function getPaletteByUid(uid: string) {
   return response.data;
 }
 
+export async function getPalettesByUid(uid: string) {
+  const response = await api.get<Palette>(`/palettes?uid=${uid}`);
+  return response.data;
+}
+
 export async function addPalette(data: Partial<Palette>) {
   const response = await api.post<Palette>("/palettes", data);
   return response.data;
