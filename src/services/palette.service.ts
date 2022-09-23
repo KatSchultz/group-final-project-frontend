@@ -17,7 +17,7 @@ export async function getPaletteByUid(uid: string) {
 }
 
 export async function getPalettesByUid(uid: string) {
-  const response = await api.get<Palette>(`/palettes?uid=${uid}`);
+  const response = await api.get<Palette[]>(`/palettes?uid=${uid}`);
   return response.data;
 }
 

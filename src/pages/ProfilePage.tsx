@@ -8,16 +8,21 @@ import { getPalettesByUid } from '../services/palette.service';
 import AppContainer from '../components/AppContainer';
 import AppHeader from '../components/AppHeader';
 import { AuthContext } from '../context/auth.context';
+import PaletteDisplay from '../components/PaletteDisplay';
+import ProfilePaletteDisplay from '../components/ProfilePaletteDisplay';
+import { IconTrash } from '@tabler/icons';
+import { deletePalette } from '../services/palette.service';
 
 
 export default function ProfilePage() {
   const { user } = useContext(AuthContext)
+  const [dbPalettes, setDbPalettes] = useState<Palette[]>([]);
 
   const palettes = useQuery(
     ['palettes', user?.uid],
     async () => await getPalettesByUid(user?.uid as string)
   );
-
+    
     console.log(palettes.data)
  
 
@@ -42,7 +47,12 @@ export default function ProfilePage() {
           </div>
           <Stack spacing="xs">
             <Center>
-             
+             {palettes.data?.map(palette => (
+              <div>
+              <ProfilePaletteDisplay palette={palette} />
+              <IconTrash onClick={() => deletePalette(palette._id)} />
+              </div>              
+             ))}
             </Center>
           </Stack>
         </Stack>
