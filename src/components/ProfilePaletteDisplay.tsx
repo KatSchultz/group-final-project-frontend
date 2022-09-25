@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 
 interface Props {
@@ -6,6 +8,9 @@ interface Props {
 }
 
 export default function ProfilePaletteDisplay({ palette }: Props) {
+  const { setPalette } = useContext(PaletteContext);
+  const navigate = useNavigate();
+
   const primaryStyle = {
     backgroundColor: `${palette.primaryColor}`,
   };
@@ -18,9 +23,16 @@ export default function ProfilePaletteDisplay({ palette }: Props) {
     backgroundColor: `${palette.tertiaryColor}`,
   };
 
+  function goToSinglePalettePage() {
+    setPalette({ ...palette });
+    navigate(`/palettes/${palette._id}`);
+  }
+
   return (
-    <div className="flex flex-col m-2 ">
-      <h3 className="font-bold">{palette.name}</h3>
+    <div className="flex flex-col m-2 w-min bg-white p-2">
+      <h3 className="font-bold" onClick={goToSinglePalettePage}>
+        {palette.name}
+      </h3>
       <div className="color-holder flex flex-row justify-between">
         <div className="text-center">
           <div>Primary</div>

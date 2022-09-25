@@ -6,6 +6,7 @@ import SignupPage from "./pages/SignupPage";
 import PrivateRoute from "./components/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
 import PaletteView from "./components/PaletteView";
+import SinglePalettePage from "./components/SinglePalettePage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/palettes" element={<PaletteView />} />
+        <Route path="/palettes/:id" element={<SinglePalettePage />} />
         <Route
           path="/account"
           element={
