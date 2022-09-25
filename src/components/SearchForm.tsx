@@ -7,29 +7,20 @@ import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 import PaletteInfoForm from "./PaletteInfoForm";
 import { Tabs } from "@mantine/core";
-import { addPalette } from "../services/palette.service";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
-import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "../libs/react-query";
 
 export default function SearchForm() {
   const { palette, setPalette } = useContext(PaletteContext);
-  const { user } = useContext(AuthContext);
   const [displayForm, setDisplayForm] = useState(false);
-
-  const navigate = useNavigate();
 
   const [colors, setColors] = useState<string[]>([]);
   const [inputMood, setInputMood] = useState("calm");
   const [mood, setMood] = useState("180,80%,80%");
   const [userInput, setUserInput] = useState("");
-  const [tempPalette, setTempPalete] = useState({
-    primaryColor: "",
-    secondaryColor: "",
-    tertiaryColor: "",
-  });
+
+  const [opened, setOpened] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUserInput(e.target.value);
@@ -95,34 +86,6 @@ export default function SearchForm() {
     });
   }
 
-  // const addPaletteMutation = useMutation(addPalette, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries(['palettes', user?.uid]);
-  //   },
-  //   onError: (error) => {
-  //     console.log(error)
-  //   },
-  // })
-
-  async function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    console.log("Save palette clicked");
-
-    // if (!user) {
-    //   navigate("/login");
-    // } else {
-    //   console.log(user.uid);
-    //   await addPaletteMutation.mutateAsync({
-    //     primaryColor: palette.primaryColor,
-    //     secondaryColor: palette.secondaryColor,
-    //     tertiaryColor: palette.tertiaryColor,
-    //     name: palette.primaryColor,
-    //     textColor: "black",
-    //     uid: user.uid,
-    //   });
-    // }
-  }
-
   function createHSL(
     hMax: number,
     hMin: number,
@@ -138,7 +101,7 @@ export default function SearchForm() {
   }
 
   function showForm() {
-    setDisplayForm(true);
+    setOpened(true);
   }
 
   function closeForm() {
@@ -194,8 +157,9 @@ export default function SearchForm() {
           ))} */}
         </div>
       </div>
-      {displayForm && <PaletteInfoForm closeForm={closeForm} />}
+
       {/* <ColorPlay /> */}
+      <PaletteInfoForm opened={opened} onClose={() => setOpened(false)} />
     </div>
   );
 }
