@@ -19,13 +19,22 @@ export default function ProfilePaletteDisplay({ palette }: Props) {
   };
 
   return (
-    <div>
-        <div>Primary Color</div>
-            <div className="w-20 h-20" style={primaryStyle}></div>
-        <div>Secondary Color</div>
-            <div className="w-20 h-20" style={secondaryStyle}></div>
-        <div>Tertiary Color</div>
-            <div className="w-20 h-20" style={tertiaryStyle}></div>
+    <div className="flex flex-col m-2 ">
+      <h3 className="font-bold">{palette.name}</h3>
+      <div className="color-holder flex flex-row justify-between">
+        <div className="text-center">
+          <div>Primary</div>
+          <div className="w-20 h-20 m-2" style={primaryStyle}></div>
+        </div>
+        <div className="text-center">
+          <div>Secondary</div>
+          <div className="w-20 h-20 m-2" style={secondaryStyle}></div>
+        </div>
+        <div className="text-center">
+          <div>Complement</div>
+          <div className="w-20 h-20 m-2" style={tertiaryStyle}></div>
+        </div>
+      </div>
     </div>
   );
 }

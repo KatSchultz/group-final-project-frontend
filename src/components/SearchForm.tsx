@@ -17,6 +17,7 @@ import { queryClient } from "../libs/react-query";
 export default function SearchForm() {
   const { palette, setPalette } = useContext(PaletteContext);
   const { user } = useContext(AuthContext);
+  const [displayForm, setDisplayForm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -94,32 +95,32 @@ export default function SearchForm() {
     });
   }
 
-  const addPaletteMutation = useMutation(addPalette, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['palettes', user?.uid]);
-    },
-    onError: (error) => {
-      console.log(error)
-    },
-  })
+  // const addPaletteMutation = useMutation(addPalette, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries(['palettes', user?.uid]);
+  //   },
+  //   onError: (error) => {
+  //     console.log(error)
+  //   },
+  // })
 
   async function saveTempPalette(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     console.log("Save palette clicked");
 
-    if (!user) {
-      navigate("/login");
-    } else {
-      console.log(user.uid);
-      await addPaletteMutation.mutateAsync({
-        primaryColor: palette.primaryColor,
-        secondaryColor: palette.secondaryColor,
-        tertiaryColor: palette.tertiaryColor,
-        name: palette.primaryColor,
-        textColor: "black",
-        uid: user.uid,
-      });
-    }
+    // if (!user) {
+    //   navigate("/login");
+    // } else {
+    //   console.log(user.uid);
+    //   await addPaletteMutation.mutateAsync({
+    //     primaryColor: palette.primaryColor,
+    //     secondaryColor: palette.secondaryColor,
+    //     tertiaryColor: palette.tertiaryColor,
+    //     name: palette.primaryColor,
+    //     textColor: "black",
+    //     uid: user.uid,
+    //   });
+    // }
   }
 
   function createHSL(
@@ -134,6 +135,14 @@ export default function SearchForm() {
     const s = Math.round(Math.random() * (sMax - sMin) + sMin);
     const l = Math.round(Math.random() * (lMax - lMin) + lMin);
     return `${h},${s}%,${l}%`;
+  }
+
+  function showForm() {
+    setDisplayForm(true);
+  }
+
+  function closeForm() {
+    setDisplayForm(false);
   }
 
   return (
@@ -165,7 +174,8 @@ export default function SearchForm() {
           </button>
           <button
             className="rounded bg-slate-200 p-2 m-2"
-            onClick={saveTempPalette}
+            onClick={showForm}
+            type="button"
           >
             Save Color Palette
           </button>
@@ -184,6 +194,7 @@ export default function SearchForm() {
           ))} */}
         </div>
       </div>
+      {displayForm && <PaletteInfoForm closeForm={closeForm} />}
       {/* <ColorPlay /> */}
     </div>
   );
