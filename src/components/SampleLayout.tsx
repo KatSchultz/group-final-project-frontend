@@ -20,7 +20,7 @@ export default function SampleLayout() {
 
   return (
     <div
-      className="sample-layout w-9/12 p-6 m-6 flex flex-col items-center content-center mx-auto rounded-2xl shadow-xl"
+      className="sample-layout flex flex-col items-center content-center p-6 m-6 w-9/12 mx-auto rounded-2xl shadow-xl"
       style={divStyles}
     >
       <img src={rays} alt="" style={imageStyles} className="image" />

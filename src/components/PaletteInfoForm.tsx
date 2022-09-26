@@ -10,6 +10,8 @@ import { PaletteContext } from "../context/palette.context";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../libs/react-query";
 import { addPalette } from "../services/palette.service";
+import PaletteDisplay from "./PaletteDisplay";
+import FormPaletteDisplay from "./FormPaletteDisplay";
 
 interface Props {
   opened: boolean;
@@ -57,6 +59,10 @@ export default function PaletteInfoForm({ onClose, opened }: Props) {
     <Modal opened={opened} onClose={onClose}>
       <div>
         <Title>Name Your Palette</Title>
+
+        <div>
+          <FormPaletteDisplay />
+        </div>
 
         <div>
           <form onSubmit={handleSubmit(onSubmit)}>

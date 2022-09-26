@@ -116,8 +116,15 @@ export default function SearchForm() {
             value={userInput}
             onChange={handleChange}
           /> */}
-          <label htmlFor="">Select a Mood</label>
-          <select name="mood" id="mood" onChange={handleMoodChange}>
+          <label className="" htmlFor="">
+            Select a Mood
+          </label>
+          <select
+            name="mood"
+            id="mood"
+            onChange={handleMoodChange}
+            className="border-solid border-2 border-slate-200 p-2 m-2"
+          >
             <option value="calm">Calm</option>
             <option value="energetic">Energetic</option>
             <option value="powerful">Powerful</option>

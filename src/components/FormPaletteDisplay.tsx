@@ -3,12 +3,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 
-interface Props {
-  palette: Palette;
-}
-
-export default function ProfilePaletteDisplay({ palette }: Props) {
-  const { setPalette } = useContext(PaletteContext);
+export default function ProfilePaletteDisplay() {
+  const { palette, setPalette } = useContext(PaletteContext);
   const navigate = useNavigate();
 
   const primaryStyle = {
@@ -29,10 +25,7 @@ export default function ProfilePaletteDisplay({ palette }: Props) {
   }
 
   return (
-    <div className="flex flex-col m-2 w-min bg-white p-2 ">
-      <h3 className="font-bold" onClick={goToSinglePalettePage}>
-        {palette.name}
-      </h3>
+    <div className="flex flex-col m-2 w-min bg-white p-2 shadow-md align-center">
       <div className="color-holder flex flex-row justify-between">
         <div className="text-center">
           <div>Primary</div>

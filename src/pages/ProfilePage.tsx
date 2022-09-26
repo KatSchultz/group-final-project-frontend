@@ -58,7 +58,7 @@ export default function ProfilePage() {
           <Stack spacing="xl">
             <Center className="flex flex-col">
               {palettes.data?.map((palette) => (
-                <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center m-2 w-min bg-white p-2 shadow-xl">
                   <ProfilePaletteDisplay palette={palette} />
                   <IconTrash
                     onClick={async () => {
