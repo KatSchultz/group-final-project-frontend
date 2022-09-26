@@ -12,7 +12,7 @@ export const PaletteContext = createContext<PaletteContextModel>({
     name: "grayscale",
     primaryColor: "rgb(230,230,230)",
     secondaryColor: "rgb(100,100,100)",
-    tertiaryColor: "rgb(0,0,0)",
+    tertiaryColor: "rgb(150,150,150)",
     uid: "",
   },
   setPalette: () => {},
@@ -28,7 +28,7 @@ export function PaletteContextProvider({ children }: Props) {
     name: "grayscale",
     primaryColor: "rgb(230,230,230)",
     secondaryColor: "rgb(100,100,100)",
-    tertiaryColor: "rgb(0,0,0)",
+    tertiaryColor: "rgb(150,150,150)",
     uid: "",
   });
 

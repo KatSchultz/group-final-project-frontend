@@ -5,6 +5,7 @@ import SampleLayout from "../components/SampleLayout";
 import { AuthContext } from "../context/auth.context";
 import AppHeader from "../components/AppHeader";
 import { PaletteContext } from "../context/palette.context";
+import AppContainer from "../components/AppContainer";
 
 export default function DashboardPage() {
   const { user } = useContext(AuthContext);
@@ -15,14 +16,16 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="w-full">
-      <AppHeader />
-      <SearchForm />
-      <div className="layout-holder p-2" style={styles}>
-        <SampleLayout />
-        <SampleLayout />
-        <SampleLayout />
+    <AppContainer>
+      <div className="w-full">
+        <AppHeader />
+        <SearchForm />
+        <div className="layout-holder p-2" style={styles}>
+          <SampleLayout />
+          <SampleLayout />
+          <SampleLayout />
+        </div>
       </div>
-    </div>
+    </AppContainer>
   );
 }

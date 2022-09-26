@@ -29,7 +29,7 @@ export default function ProfilePaletteDisplay({ palette }: Props) {
   }
 
   return (
-    <div className="flex flex-col m-2 w-min bg-white p-2">
+    <div className="flex flex-col m-2 w-min bg-white p-2 shadow-xl">
       <h3 className="font-bold" onClick={goToSinglePalettePage}>
         {palette.name}
       </h3>

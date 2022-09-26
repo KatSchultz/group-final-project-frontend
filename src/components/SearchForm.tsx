@@ -6,7 +6,7 @@ import PaletteDisplay from "./PaletteDisplay";
 import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 import PaletteInfoForm from "./PaletteInfoForm";
-import { Tabs } from "@mantine/core";
+import { Center, Container, Stack, Tabs } from "@mantine/core";
 import { AuthContext } from "../context/auth.context";
 import { useNavigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
@@ -104,14 +104,9 @@ export default function SearchForm() {
     setOpened(true);
   }
 
-  function closeForm() {
-    setDisplayForm(false);
-  }
-
   return (
     <div>
       <div className="theColorAPI flex flex-col items-center bg-white">
-        <h1>The Color API Testing</h1>
         <form action="">
           {/* <label>Color Search</label>
           <input
@@ -144,10 +139,15 @@ export default function SearchForm() {
           </button>
         </form>
         <div className="palette flex flex-row">
-          {colors.map((color, index) => (
-            <PaletteDisplay key={index} color={color} />
-          ))}
-
+          <Container className=" m-2 w-min bg-white p-2 shadow-xl">
+            <Stack>
+              <Center>
+                {colors.map((color, index) => (
+                  <PaletteDisplay key={index} color={color} />
+                ))}
+              </Center>
+            </Stack>
+          </Container>
           {/* {analogColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
           ))} */}
