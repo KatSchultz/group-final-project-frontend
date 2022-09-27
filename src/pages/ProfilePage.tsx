@@ -2,22 +2,26 @@ import { Avatar, Center, Container, Stack, Text, Title } from "@mantine/core";
 import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { addPalette } from "../services/palette.service";
+import { addPalette, updatePalette, getPalettesByUid, deletePalette } from "../services/palette.service";
 import { Palette } from "../types/palette.types";
-import { getPalettesByUid } from "../services/palette.service";
 import AppContainer from "../components/AppContainer";
 import AppHeader from "../components/AppHeader";
 import { AuthContext } from "../context/auth.context";
 import PaletteDisplay from "../components/PaletteDisplay";
 import ProfilePaletteDisplay from "../components/ProfilePaletteDisplay";
-import { IconTrash } from "@tabler/icons";
-import { deletePalette } from "../services/palette.service";
+import { IconTrash, IconEdit } from "@tabler/icons";
 import { queryClient } from "../libs/react-query";
 import { AxiosError } from "axios";
+import UpdatePaletteInfoForm from "../components/UpdatePaletteInfoForm";
 
 export default function ProfilePage() {
   const { user } = useContext(AuthContext);
   const [dbPalettes, setDbPalettes] = useState<Palette[]>([]);
+  const [opened, setOpened] = useState(false);
+
+  function showForm() {
+    setOpened(true);
+  }
 
   const palettes = useQuery(
     ["palettes", user?.uid],
@@ -65,6 +69,10 @@ export default function ProfilePage() {
                       await deletePaletteMutation.mutateAsync(palette?._id);
                     }}
                   />
+        <UpdatePaletteInfoForm opened={opened} onClose={() => {setOpened(false)}} palette={palette} />
+                  <IconEdit 
+                    onClick={showForm}
+                    />
                 </div>
               ))}
             </Center>
