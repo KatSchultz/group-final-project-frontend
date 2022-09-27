@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 
-export default function ProfilePaletteDisplay() {
+export default function FormPaletteDisplay() {
   const { palette, setPalette } = useContext(PaletteContext);
   const navigate = useNavigate();
 

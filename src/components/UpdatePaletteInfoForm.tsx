@@ -11,6 +11,8 @@ import { queryClient } from "../libs/react-query";
 import { addPalette, updatePalette } from "../services/palette.service";
 import PaletteDisplay from "./PaletteDisplay";
 import FormPaletteDisplay from "./FormPaletteDisplay";
+import { PaletteContext } from "../context/palette.context";
+import ProfilePaletteDisplay from "./ProfilePaletteDisplay";
 
 interface Props {
   opened: boolean;
@@ -18,9 +20,16 @@ interface Props {
   palette: Palette;
 }
 
-export default function UpdatePaletteInfoForm({ onClose, opened, palette }: Props) {
+export default function UpdatePaletteInfoForm({
+  onClose,
+  opened,
+  palette,
+}: Props) {
   const { user } = useContext(AuthContext);
+  const { setPalette } = useContext(PaletteContext);
   const navigate = useNavigate();
+
+  setPalette(palette);
 
   const {
     register,
@@ -31,10 +40,10 @@ export default function UpdatePaletteInfoForm({ onClose, opened, palette }: Prop
 
   const editPaletteMutation = useMutation(updatePalette, {
     onSuccess: (updatedPalette) => {
-        reset({
-            name: updatedPalette.name,
-        })
-        queryClient.invalidateQueries(['palettes', user?._id])
+      reset({
+        name: updatedPalette.name,
+      });
+      queryClient.invalidateQueries(["palettes", user?._id]);
     },
     onError: (error) => {
       console.log(error);
@@ -47,7 +56,7 @@ export default function UpdatePaletteInfoForm({ onClose, opened, palette }: Prop
     }
     await editPaletteMutation.mutateAsync({
       id: palette._id,
-      data: {...data},
+      data: { ...data },
     });
     reset();
     onClose();
@@ -59,7 +68,7 @@ export default function UpdatePaletteInfoForm({ onClose, opened, palette }: Prop
         <Title>Rename Your Palette</Title>
 
         <div>
-          <FormPaletteDisplay />
+          <ProfilePaletteDisplay palette={palette} />
         </div>
 
         <div>
