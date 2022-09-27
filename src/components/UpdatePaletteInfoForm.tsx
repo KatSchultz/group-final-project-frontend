@@ -29,8 +29,6 @@ export default function UpdatePaletteInfoForm({
   const { setPalette } = useContext(PaletteContext);
   const navigate = useNavigate();
 
-  setPalette(palette);
-
   const {
     register,
     handleSubmit,
@@ -43,7 +41,7 @@ export default function UpdatePaletteInfoForm({
       reset({
         name: updatedPalette.name,
       });
-      queryClient.invalidateQueries(["palettes", user?._id]);
+      queryClient.invalidateQueries(["palettes"]);
     },
     onError: (error) => {
       console.log(error);

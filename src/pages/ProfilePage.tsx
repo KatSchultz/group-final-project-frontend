@@ -17,8 +17,6 @@ export default function ProfilePage() {
     async () => await getPalettesByUid(user?.uid as string)
   );
 
-  console.log(palettes.data);
-
   return (
     <AppContainer>
       <AppHeader />
