@@ -19,6 +19,15 @@ export default function DashboardPage() {
     <AppContainer>
       <div className="w-full">
         <AppHeader />
+        <div className="intro flex flex-col items-center bg-white font-bold">
+          <div>
+            <h3>Unsure what colors to use on your website?</h3>
+          </div>{" "}
+          <div>
+            Search color palettes based on the mood you want to convey to your
+            users
+          </div>
+        </div>
         <SearchForm />
         <div className="layout-holder p-2 w-full" style={styles}>
           <div className="full-width-sample  w-full mx-auto ">

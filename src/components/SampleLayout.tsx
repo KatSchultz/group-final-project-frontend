@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import rays from "../images/rays.jpg";
+import balls from "../images/balls.jpg";
 import { PaletteContext } from "../context/palette.context";
 
 export default function SampleLayout() {
+  const [imgState, setImgState] = useState("rays");
   const { palette } = useContext(PaletteContext);
   const divStyles = {
     backgroundColor: `white`,
@@ -18,6 +20,12 @@ export default function SampleLayout() {
     border: `2px solid ${palette.tertiaryColor}`,
   };
 
+  // function imageRandomizer() {
+  //   if (Math.random() > 0.5) {
+  //     return rays;
+  //   } else return balls;
+  // }
+
   return (
     <div
       className="sample-layout flex flex-col items-center content-center p-6 m-6 w-9/12 mx-auto rounded-2xl shadow-xl"
@@ -31,7 +39,7 @@ export default function SampleLayout() {
         aspernatur quod saepe sapiente id voluptatibus.
       </p>
       <div className="call-to-action flex justify-center items-center">
-        <p>Press this button for more info</p>
+        <p>Contrasting colors will draw attention to buttons</p>
         <button style={buttonStyle} className="p-2 m-2 rounded-lg">
           Click Me!
         </button>

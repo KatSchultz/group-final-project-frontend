@@ -7,9 +7,6 @@ import { PaletteContext } from "../context/palette.context";
 import { Palette } from "../types/palette.types";
 import PaletteInfoForm from "./PaletteInfoForm";
 import { Center, Container, Stack, Tabs } from "@mantine/core";
-import { AuthContext } from "../context/auth.context";
-import { useNavigate } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
 
 export default function SearchForm() {
   const { palette, setPalette } = useContext(PaletteContext);
@@ -106,7 +103,7 @@ export default function SearchForm() {
 
   return (
     <div>
-      <div className="theColorAPI flex flex-col items-center bg-white">
+      <div className="theColorAPI flex flex-col items-center bg-white md:flex-row justify-center">
         <form action="">
           {/* <label>Color Search</label>
           <input
@@ -130,19 +127,12 @@ export default function SearchForm() {
             <option value="powerful">Powerful</option>
           </select>
           <button
-            className="rounded bg-slate-200 p-2 m-2"
+            className="rounded bg-slate-200 p-2 m-1"
             id="scheme-button"
             type="submit"
             onClick={handleSubmit}
           >
             Get Colors
-          </button>
-          <button
-            className="rounded bg-slate-200 p-2 m-2"
-            onClick={showForm}
-            type="button"
-          >
-            Save Color Palette
           </button>
         </form>
         <div className="palette flex flex-row">
@@ -162,7 +152,14 @@ export default function SearchForm() {
           {/* {complementColors.map((color, index) => (
             <PaletteDisplay key={index} color={color} />
           ))} */}
-        </div>
+        </div>{" "}
+        <button
+          className="rounded bg-slate-200 p-2 m-1"
+          onClick={showForm}
+          type="button"
+        >
+          Save Color Palette
+        </button>
       </div>
 
       {/* <ColorPlay /> */}
