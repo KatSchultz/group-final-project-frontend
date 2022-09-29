@@ -15,7 +15,6 @@ function App() {
         <Route path="/" element={<DashboardPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/palettes" element={<PaletteView />} />
         <Route path="/palettes/:id" element={<SinglePalettePage />} />
         <Route
           path="/account"

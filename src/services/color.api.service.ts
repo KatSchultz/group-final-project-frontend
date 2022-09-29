@@ -15,6 +15,7 @@ export function getColorScheme(
       },
     })
     .then((response) => {
+      console.log(response);
       return response;
     });
 }

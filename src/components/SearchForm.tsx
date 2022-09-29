@@ -10,8 +10,6 @@ import { Center, Container, Stack, Tabs } from "@mantine/core";
 
 export default function SearchForm() {
   const { palette, setPalette } = useContext(PaletteContext);
-  const [displayForm, setDisplayForm] = useState(false);
-
   const [colors, setColors] = useState<string[]>([]);
   const [inputMood, setInputMood] = useState("calm");
   const [mood, setMood] = useState("180,80%,80%");
