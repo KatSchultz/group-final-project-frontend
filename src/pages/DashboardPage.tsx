@@ -37,11 +37,11 @@ export default function DashboardPage() {
           <div className="full-width-sample  w-full mx-auto ">
             <SampleLayout />
           </div>
-          <div className="triple-card-layout flex flex-col lg:flex-row lg:space-x-8 lg:mx-auto lg:w-9/12">
-            <SampleLayout />
-            <SampleLayout />
-            <SampleLayout />
-          </div>
+          {/* <div className="triple-card-layout flex flex-col lg:flex-row lg:space-x-8 lg:mx-auto lg:w-9/12"> */}
+          <SampleLayout />
+          <SampleLayout />
+          <SampleLayout />
+          {/* </div> */}
         </div>
       </div>
     </AppContainer>

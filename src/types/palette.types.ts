@@ -1,7 +1,7 @@
 export interface Palette {
   primaryColor: string;
   secondaryColor: string;
-  tertiaryColor?: string;
+  tertiaryColor: string;
   fourthColor?: string;
   fifthColor?: string;
   sixthColor?: string;
