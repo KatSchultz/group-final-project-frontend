@@ -71,7 +71,11 @@ export default function ProfilePaletteDisplay({ palette }: Props) {
               {palette.primaryColor}{" "}
               <CopyButton value={palette.primaryColor}>
                 {({ copied, copy }) => (
-                  <Button color={copied ? "teal" : "blue"} onClick={copy}>
+                  <Button
+                    color={copied ? "teal" : "blue"}
+                    onClick={copy}
+                    style={{ backgroundColor: "blue" }}
+                  >
                     {copied ? "Copied color" : "Copy color"}
                   </Button>
                 )}
@@ -91,7 +95,11 @@ export default function ProfilePaletteDisplay({ palette }: Props) {
               {palette.secondaryColor}{" "}
               <CopyButton value={palette.secondaryColor}>
                 {({ copied, copy }) => (
-                  <Button color={copied ? "teal" : "blue"} onClick={copy}>
+                  <Button
+                    color={copied ? "teal" : "blue"}
+                    onClick={copy}
+                    style={{ backgroundColor: "blue" }}
+                  >
                     {copied ? "Copied color" : "Copy color"}
                   </Button>
                 )}
@@ -111,7 +119,11 @@ export default function ProfilePaletteDisplay({ palette }: Props) {
               {palette.tertiaryColor}{" "}
               <CopyButton value={palette.tertiaryColor}>
                 {({ copied, copy }) => (
-                  <Button color={copied ? "teal" : "blue"} onClick={copy}>
+                  <Button
+                    color={copied ? "teal" : "blue"}
+                    onClick={copy}
+                    style={{ backgroundColor: "blue" }}
+                  >
                     {copied ? "Copied color" : "Copy color"}
                   </Button>
                 )}
